@@ -27,15 +27,12 @@ export async function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('pewpewbangbang.closeUnpinnedFiles', () => {
 			const pinnedFiles = pinnedFilesProvider.getPinnedFiles();
-			const allFiles = vscode.workspace.textDocuments.map((doc) => doc.uri.toString());
-			allFiles.forEach((file) => {
-				vscode.window.tabGroups.activeTabGroup.tabs.forEach((tab) => {
-					if (tab.input instanceof vscode.TabInputText && tab.input.uri.toString() === file) {
-						if (!pinnedFiles.includes(file)) {
-							vscode.window.tabGroups.close(tab);
-						}
+			vscode.window.tabGroups.activeTabGroup.tabs.forEach((tab) => {
+				if (tab.input instanceof vscode.TabInputText) {
+					if (!pinnedFiles.includes(tab.input.uri.toString())) {
+						vscode.window.tabGroups.close(tab);
 					}
-				});
+				}
 			});
 		})
 	);

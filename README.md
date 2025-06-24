@@ -1,71 +1,43 @@
-# pewpewbangbang README
+# pewpewbangbang
 
-This is the README for your extension "pewpewbangbang". After writing up a brief description, we recommend including the following sections.
+A VSCode extension for easier file navigation. Allows you to pin files to be more accessible later.
 
-## Features
+## How Does It Work?
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+When working on a feature for your project, usually there are very few files that you have to work with continously. By [pinning](#pin-file) the files you can save them in an easy-to-access store. You can then set keybinds to open those quickly.
 
-For example if there is an image subfolder under your extension project workspace:
+## Commands
 
-\!\[feature X\]\(images/feature-x.png\)
+These are all commands that can be run using `Ctrl + Shift + P + <command_name>`. I recommend you add keybinds to the ones you find useful.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### Pin File
 
-## Requirements
+Command name: `pewpewbangbang.pinFile`
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+-   Saves the file in the pinned files list.
 
-## Extension Settings
+### Unpin File
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Command name: `pewpewbangbang.unpinFile`
 
-For example:
+-   Removes a file from the pinned files list.
 
-This extension contributes the following settings:
+### Open Pinned File 1-5
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+Command name: `pewpewbangbang.openPinnedFileX` (X: number between 1-5)
 
-## Known Issues
+-   Opens the file in your editor based on its position in the list (1 indexed).
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+### Close Unpinned Files
 
-## Release Notes
+Command name: `pewpewbangbang.closeUnpinnedFiles` (X: number between 1-5)
 
-Users appreciate release notes as you update your extension.
+-   Closes all tabs of files not in the pinned files list. Only in the current active tab group.
 
-### 1.0.0
+## Configuration
 
-Initial release of ...
+### Verbosity
 
-### 1.0.1
+type: `none` | `debug`
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+-   Use `none` for no logging, or debug for more detailed messages. Recommended to use `none`, debug is annoying.
