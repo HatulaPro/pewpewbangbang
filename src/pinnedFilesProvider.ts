@@ -29,7 +29,7 @@ export class PinnedFilesProvider implements vscode.TreeDataProvider<Entry> {
 		if (element) {
 			return [];
 		}
-		const pinnedFiles = vscode.workspace.getConfiguration('pewpewbangbang').get<string[]>('pinnedFiles', []);
+		const pinnedFiles = this.getPinnedFiles();
 		if (pinnedFiles.length > 0) {
 			return Promise.all(
 				pinnedFiles.map(async (file) => {
@@ -47,7 +47,11 @@ export class PinnedFilesProvider implements vscode.TreeDataProvider<Entry> {
 		throw new Error('Method not implemented.');
 	}
 	public getPinnedFiles(): string[] {
-		return vscode.workspace.getConfiguration('pewpewbangbang').get<string[]>('pinnedFiles', []).slice(0, PinnedFilesProvider.MAX_PINNED_FILES);
+		const currentDocument = vscode.window.activeTextEditor?.document.uri ?? null;
+		return vscode.workspace
+			.getConfiguration('pewpewbangbang', currentDocument ? vscode.workspace.getWorkspaceFolder(currentDocument) : null)
+			.get<string[]>('pinnedFiles', [])
+			.slice(0, PinnedFilesProvider.MAX_PINNED_FILES);
 	}
 	public async setFileAsPinned(file: string): Promise<void> {
 		const pinnedFiles = this.getPinnedFiles();
@@ -63,9 +67,11 @@ export class PinnedFilesProvider implements vscode.TreeDataProvider<Entry> {
 		return this.setPinnedFiles(pinnedFiles.filter((uri) => uri !== file));
 	}
 	public async setPinnedFiles(files: string[]): Promise<void> {
+		const currentDocument = vscode.window.activeTextEditor?.document.uri ?? null;
+
 		return new Promise((res) =>
 			vscode.workspace
-				.getConfiguration('pewpewbangbang')
+				.getConfiguration('pewpewbangbang', currentDocument ? vscode.workspace.getWorkspaceFolder(currentDocument) : null)
 				.update('pinnedFiles', files)
 				.then(() => {
 					this.dataChangedEventEmitter.fire(null);
@@ -104,4 +110,5 @@ export class PinnedFilesProvider implements vscode.TreeDataProvider<Entry> {
 			),
 		]);
 	}
+	handleFileHighlighting() {}
 }
