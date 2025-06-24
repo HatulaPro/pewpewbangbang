@@ -8,13 +8,18 @@ export interface Entry {
 
 export class PinnedFilesProvider implements vscode.TreeDataProvider<Entry> {
 	static MAX_PINNED_FILES = 5;
-	private dataChangedEventEmitter: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
+	public dataChangedEventEmitter: vscode.EventEmitter<any> = new vscode.EventEmitter<any>();
 	readonly onDidChangeTreeData: vscode.Event<void | Entry | Entry[] | null | undefined> = this.dataChangedEventEmitter.event;
+	private activeUri?: string;
 
 	getTreeItem(element: Entry): vscode.TreeItem | Thenable<vscode.TreeItem> {
 		const index = this.getPinnedFiles().indexOf(element.uri.toString());
+		const label = `${index + 1}: ${element.uri.path.split('/').pop() || 'Unknown'}`;
 		return {
-			label: `${index + 1}: ${element.uri.path.split('/').pop() || 'Unknown'}`,
+			label: {
+				label,
+				highlights: this.activeUri === element.uri.toString() ? [[0, label.length]] : [],
+			},
 			resourceUri: element.uri,
 			command: {
 				title: 'Open File',
@@ -41,10 +46,17 @@ export class PinnedFilesProvider implements vscode.TreeDataProvider<Entry> {
 		}
 	}
 	getParent?(element: Entry): vscode.ProviderResult<Entry> {
-		throw new Error('Method not implemented.');
+		return null;
 	}
 	resolveTreeItem?(item: vscode.TreeItem, element: Entry, token: vscode.CancellationToken): vscode.ProviderResult<vscode.TreeItem> {
 		throw new Error('Method not implemented.');
+	}
+	public setActiveUri(uri?: string) {
+		this.activeUri = uri;
+		this.dataChangedEventEmitter.fire(null);
+	}
+	public getActiveUri(uri?: string) {
+		this.activeUri = uri;
 	}
 	public getPinnedFiles(): string[] {
 		const currentDocument = vscode.window.activeTextEditor?.document.uri ?? null;

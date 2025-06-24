@@ -84,6 +84,11 @@ export async function activate(context: vscode.ExtensionContext) {
 		showCollapseAll: true,
 		dragAndDropController: new DragAndDropController(pinnedFilesProvider),
 	});
+	context.subscriptions.push(
+		vscode.window.onDidChangeActiveTextEditor(async (editor) => {
+			pinnedFilesProvider.setActiveUri(editor?.document.uri.toString());
+		})
+	);
 	context.subscriptions.push(treeView);
 }
 export function deactivate() {}
