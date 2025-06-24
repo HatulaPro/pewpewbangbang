@@ -1,0 +1,149 @@
+{
+	"name": "pewpewbangbang",
+	"displayName": "pewpewbangbang",
+	"description": "",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.101.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"main": "./dist/extension.js",
+	"contributes": {
+		"configuration": {
+			"properties": {
+				"pewpewbangbang.pinnedFiles": {
+					"type": "array",
+					"default": [],
+					"description": "List of currently pinned files."
+				},
+				"pewpewbangbang.verbosity": {
+					"type": "string",
+					"default": "none",
+					"description": "Use `none` for no logging, or debug for more detailed messages.",
+					"enum": [
+						"none",
+						"debug"
+					],
+					"enumItemLabels": [
+						"No logging",
+						"Debug"
+					]
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "pewpewbangbang.pinFile",
+				"title": "Pin File",
+				"icon": "$(pinned)"
+			},
+			{
+				"command": "pewpewbangbang.unpinFile",
+				"title": "Unpin File",
+				"icon": "$(pinned)"
+			},
+			{
+				"command": "pewpewbangbang.openPinnedFile1",
+				"title": "Open Pinned File 1",
+				"icon": "$(go-to-file)"
+			},
+			{
+				"command": "pewpewbangbang.openPinnedFile2",
+				"title": "Open Pinned File 2",
+				"icon": "$(go-to-file)"
+			},
+			{
+				"command": "pewpewbangbang.openPinnedFile3",
+				"title": "Open Pinned File 3",
+				"icon": "$(go-to-file)"
+			},
+			{
+				"command": "pewpewbangbang.openPinnedFile4",
+				"title": "Open Pinned File 4",
+				"icon": "$(go-to-file)"
+			},
+			{
+				"command": "pewpewbangbang.openPinnedFile5",
+				"title": "Open Pinned File 5",
+				"icon": "$(go-to-file)"
+			},
+			{
+				"command": "pewpewbangbang.closeUnpinnedFiles",
+				"title": "Close Unpinned Files"
+			}
+		],
+		"views": {
+			"explorer": [
+				{
+					"type": "tree",
+					"id": "pewpewbangbang.section",
+					"name": "pewpewbangbang",
+					"contextualTitle": "pewpewbangbang",
+					"icon": ""
+				}
+			]
+		},
+		"menus": {
+			"view/item/context": [
+				{
+					"command": "pewpewbangbang.unpinFile",
+					"when": "view == pewpewbangbang.section",
+					"group": "inline"
+				},
+				{
+					"command": "pewpewbangbang.openPinnedFile1",
+					"when": "view == pewpewbangbang.section && viewItem == '0'",
+					"group": "inline"
+				},
+				{
+					"command": "pewpewbangbang.openPinnedFile2",
+					"when": "view == pewpewbangbang.section && viewItem == '1'",
+					"group": "inline"
+				},
+				{
+					"command": "pewpewbangbang.openPinnedFile3",
+					"when": "view == pewpewbangbang.section && viewItem == '2'",
+					"group": "inline"
+				},
+				{
+					"command": "pewpewbangbang.openPinnedFile4",
+					"when": "view == pewpewbangbang.section && viewItem == '3'",
+					"group": "inline"
+				},
+				{
+					"command": "pewpewbangbang.openPinnedFile5",
+					"when": "view == pewpewbangbang.section && viewItem == '4'",
+					"group": "inline"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run package",
+		"compile": "webpack",
+		"watch": "webpack --watch",
+		"package": "webpack --mode production --devtool hidden-source-map",
+		"compile-tests": "tsc -p . --outDir out",
+		"watch-tests": "tsc -p . -w --outDir out",
+		"pretest": "npm run compile-tests && npm run compile && npm run lint",
+		"lint": "eslint src",
+		"test": "vscode-test"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.101.0",
+		"@types/mocha": "^10.0.10",
+		"@types/node": "20.x",
+		"@typescript-eslint/eslint-plugin": "^8.31.1",
+		"@typescript-eslint/parser": "^8.31.1",
+		"eslint": "^9.25.1",
+		"typescript": "^5.8.3",
+		"ts-loader": "^9.5.2",
+		"webpack": "^5.99.7",
+		"webpack-cli": "^6.0.1",
+		"@vscode/test-cli": "^0.0.10",
+		"@vscode/test-electron": "^2.5.2"
+	}
+}
