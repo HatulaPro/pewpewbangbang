@@ -5,6 +5,7 @@
 		"type": "git",
 		"url": "https://github.com/HatulaPro/pewpewbangbang.git"
 	},
+	"publisher": "HatulaPro",
 	"description": "",
 	"version": "0.0.1",
 	"engines": {
