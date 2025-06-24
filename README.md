@@ -1,4 +1,4 @@
-![images/icon.png](pewpewbangbang icon)
+![pewpewbangbang icon](images/icon.png)
 
 # pewpewbangbang
 
