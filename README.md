@@ -1,3 +1,5 @@
+![images/icon.png](pewpewbangbang icon)
+
 # pewpewbangbang
 
 A VSCode extension for easier file navigation. Allows you to pin files to be more accessible later.
@@ -8,7 +10,7 @@ When working on a feature for your project, usually there are very few files tha
 
 ## Commands
 
-These are all commands that can be run using `Ctrl + Shift + P + <command_name>`. I recommend you add keybinds to the ones you find useful.
+These are all commands that can be run using `Ctrl + Shift + P` + `<command_name>`. I recommend you add keybinds to the ones you find useful.
 
 ### Pin File
 
